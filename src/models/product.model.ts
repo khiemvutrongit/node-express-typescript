@@ -1,4 +1,4 @@
-import { connect, Model, model, Schema } from "mongoose";
+import { Model, model, Schema, Date } from "mongoose";
 import { Name, NameSchema } from "./name.model";
 
 export interface ProductFrom {
@@ -20,9 +20,10 @@ export interface Products {
 	categories: string[];
 	technicalSpecifications: string;
 	productFrom: ProductFrom[];
-	createdAt: string;
 	createdBy: string;
-	modifiedAt: string;
+	modifiedBy: string;
+	createdAt: Date;
+	modifiedAt: Date;
 	active: boolean;
 }
 
@@ -73,9 +74,16 @@ const ProductSchema = new Schema <Products, Model<Products>>({
 			},
 		},
 	],
-	createdAt: String,
 	createdBy: String,
-	modifiedAt: String,
+	modifiedBy: String,
+	createdAt: { 
+		type: Date, 
+		default: Date.now 
+	},
+	modifiedAt: { 
+		type: Date, 
+		default: Date.now 
+	},
 	active: {
 		type: Boolean,
 		default: true,
