@@ -1,1 +1,1 @@
-export * from "./ohana.controller";
+export * from "./product.controller";

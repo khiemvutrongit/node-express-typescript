@@ -1,19 +1,11 @@
-require("dotenv").config({ path: '../docker/develop.env' });
-import express, { json, urlencoded } from "express";
-const app = express();
+import { connect } from "mongoose";
+import app from "./app";
 const port = process.env["PORT"] || 3000;
-import routes from "./routes";
 
-app.use(json());
-app.use(
-  urlencoded({
-    extended: true,
-  })
-);
-
-app.use("", routes);
-
-app.listen(port, () => {
-  console.log("  Starting app ");
-  console.log(`  http://localhost:${port}`);
+connect(process.env['DB_MONGO_URL']).then(() => {
+	console.log("Connect database");
+	app.listen(port, () => {
+		console.log("Starting app");
+		console.log(`http://localhost:${port}`);
+	});
 });

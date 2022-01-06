@@ -1,8 +1,8 @@
 import { Router } from "express";
 const router = Router();
 
-import OhanaRouter from "./v1/ohana.router";
+import ProductRouter from "./v1/product.router";
 
-router.use("/ohana", OhanaRouter);
+router.use("/v1", ProductRouter);
 
 export default router;

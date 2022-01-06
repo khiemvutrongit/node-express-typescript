@@ -1,9 +1,13 @@
 {
+    "exclude": [
+        "jest.config.ts"
+    ],
     "compilerOptions": {
         "module": "commonjs",
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
         "target": "ESNext",
+        "types": ["node", "jest"],
         "noImplicitAny": true,
         "moduleResolution": "node",
         "sourceMap": false,
@@ -12,8 +16,7 @@
         "outDir": "../dist",
         "baseUrl": ".",
         "typeRoots": [
-            "./node_modules/@types",
-            "./types/*",
+            "./node_modules/@types"
         ],
         "paths": {
             "*": [
