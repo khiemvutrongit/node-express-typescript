@@ -6,8 +6,15 @@ dotenv.config({
 
 import express, { json, urlencoded } from "express";
 import status from "http-status";
+import { connect } from 'mongoose';
 import routes from "./routes";
 const app = express();
+
+connect(process.env['DB_MONGO_URL']).then(() => {
+	console.log("Connect database");
+}).catch((error) => {
+	console.log(error);
+});
 
 app.use(json());
 app.use(

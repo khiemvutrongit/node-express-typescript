@@ -3,7 +3,7 @@ import { Router, Request, Response } from "express";
 
 const router = Router();
 
-router.post("/product", CreateProductController);
+router.post("/products", CreateProductController);
 
 router.get("/check", (req: Request, res: Response) => {
   return res.json({

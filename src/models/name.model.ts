@@ -9,11 +9,11 @@ export const NameSchema = new Schema({
   key: {
     type: String,
     required: true,
-    maxlength: 300
+    maxlength: 2
   },
   value: {
     type: String,
     required: true,
-    maxlength: 2
+    maxlength: 300
   }
 })
