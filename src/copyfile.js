@@ -7,8 +7,8 @@ delete packageFile.nodemonConfig;
 const packageObj = {
   ...packageFile,
   scripts: {
-    start: "node server.js",
-    test: "jest -i --colors --verbose --detectOpenHandles"
+    start: "DEVELOP_ENV=prod node server.js",
+    test: "DEVELOP_ENV=dev jest --color"
   }
 };
 

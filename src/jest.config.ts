@@ -5,6 +5,7 @@ const config: Config.InitialOptions = {
   preset: 'ts-jest',
   verbose: true,
   maxWorkers: '',
-  rootDir: ''
+  rootDir: '',
+  watchAll: false
 };
 export default config;

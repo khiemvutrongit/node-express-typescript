@@ -91,4 +91,4 @@ const ProductSchema = new Schema <Products, Model<Products>>({
 });
 // End Product Schema
 
-export const ProductModel = model("products", ProductSchema);
+export const ProductModel: Model<Products> = model("products", ProductSchema);

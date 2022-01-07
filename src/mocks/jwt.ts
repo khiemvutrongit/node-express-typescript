@@ -2,7 +2,7 @@ import { SignOptions } from "jsonwebtoken";
 
 export const payload = {
   acc: '615989459035e9a70614717b',
-  permission: "mp:r mp:c",
+  permissions: "mp:r mp:c",
   email: 'test@gmail.com'
 }
 
