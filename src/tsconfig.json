@@ -1,6 +1,10 @@
-{
+{   
+    "ts-node": {
+        "transpileOnly": true
+    },
     "exclude": [
-        "jest.config.ts"
+        "jest.config.ts",
+        "node_modules"
     ],
     "compilerOptions": {
         "module": "commonjs",
@@ -16,12 +20,13 @@
         "outDir": "../dist",
         "baseUrl": ".",
         "typeRoots": [
-            "./node_modules/@types"
+            "./node_modules/@types",
+            "./types"
         ],
         "paths": {
             "*": [
                 "node_modules/*"
             ]
         }
-    },
+    }
 }

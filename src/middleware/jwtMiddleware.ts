@@ -1,4 +1,4 @@
-import { RequestHandler } from "express";
+import { Request, RequestHandler, Response } from "express";
 import { FORBIDDEN, UNAUTHORIZED } from "http-status";
 import { getJwtPayload } from "./getJwtPayload";
 
@@ -19,7 +19,7 @@ export function JwtMiddleware(condition: ConditionHeader): RequestHandler {
     requiredPermissions = permission;
   }
 
-  return async function jwtVerifyMiddleware(req, res, next) {
+  return async function jwtVerifyMiddleware(req: Request, res: Response, next) {
     try {
       const { headers } = req;
 

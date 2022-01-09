@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv';
 const path = require('path');
 
 dotenv.config({
-	path: path.resolve(__dirname, `../docker/.env.${process.env['DEVELOP_ENV']}`)
+	path: path.resolve(__dirname, `../docker/.env`)
 });
 
 import express, { json, urlencoded } from "express";
