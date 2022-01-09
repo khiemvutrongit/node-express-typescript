@@ -1,7 +1,11 @@
 {   
+    "compileOnSave": true,
     "ts-node": {
         "transpileOnly": true
     },
+    "include": [
+        "./**/*"
+    ],
     "exclude": [
         "jest.config.ts",
         "node_modules"
@@ -14,19 +18,20 @@
         "types": ["node", "jest"],
         "noImplicitAny": true,
         "moduleResolution": "node",
-        "sourceMap": false,
+        "sourceMap": true,
         "skipLibCheck": true,
         "resolveJsonModule": true,
         "outDir": "../dist",
         "baseUrl": ".",
         "typeRoots": [
             "./node_modules/@types",
-            "./types"
+            "./types/*"
         ],
         "paths": {
             "*": [
-                "node_modules/*"
+                "node_modules/*",
+                "."
             ]
-        }
+        },
     }
 }

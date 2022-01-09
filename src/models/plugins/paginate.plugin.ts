@@ -28,11 +28,13 @@ export const paginate = (schema: Schema) => {
    * @returns {Promise<QueryResult>}
    */
   schema.statics.paginate = function (req: Request, options?: IPaginateOptions) {
+    
     const filter = {
       ...parserQuery(req),
       active: false
     }
-    const sort = options.sort || 'createdAt';
+    
+    const sort = options.sort ? options.sort.trim() : 'createdAt';
     const limit = options.limit && parseInt(options.limit, 10) > 0 ? parseInt(options.limit, 10) : 10;
     const page = options.page && parseInt(options.page, 10) > 0 ? parseInt(options.page, 10) : 1;
     const skip = (page - 1) * limit;

@@ -8,6 +8,7 @@ import {
 } from "http-status";
 import {
   createProductService,
+  deleteProductService,
   getProductService,
   getProductsService,
   updateProductService,
@@ -49,7 +50,8 @@ export const CreateProductController = async (
  */
 export const GetProductsController = async (req: Request, res: Response) => {
   try {
-    const options: IPaginateOptions = req.params;
+    const options: IPaginateOptions = req.query;
+    
     let result;
     try {
       result = await getProductsService(req, options);
@@ -117,3 +119,26 @@ export const UpdateProductController = async (req: Request, res: Response) => {
     return res.status(INTERNAL_SERVER_ERROR).json(error);
   }
 };
+
+/**
+ * Get a product
+ * @param req - Request parameter
+ * @param res - Send JSON response.
+ * @returns {Promise<Response>}
+ */
+export const DeleteProductController = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const payload = req.payload;
+
+    try {
+      await deleteProductService(id, payload);
+    } catch (error) {
+      return res.status(error.status || BAD_REQUEST).json(error)
+    }
+
+    return res.status(204).json();
+  } catch (error) {
+    return res.status(INTERNAL_SERVER_ERROR).json(error);
+  }
+}

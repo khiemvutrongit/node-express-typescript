@@ -7,20 +7,11 @@ interface IQueryExtractor {
   value: string;
 }
 
-const operators = [
-  'like',
-  'eq',
-  'gt',
-  'gte',
-  'lt',
-  'lte',
-  'ne',
-  'nin'
-];
+const operators = ["like", "eq", "gt", "gte", "lt", "lte", "ne", "nin"];
 
 function getCondition(parameter: string) {
   for (const condition of operators) {
-    const conditionStr = `%${condition}%`
+    const conditionStr = `%${condition}%`;
     if (parameter.includes(conditionStr)) {
       return condition;
     }
@@ -29,7 +20,7 @@ function getCondition(parameter: string) {
 }
 
 function isValidQueryParam(parameter: string) {
-  if (!parameter || typeof parameter !== 'string') {
+  if (!parameter || typeof parameter !== "string") {
     return false;
   }
 
@@ -46,10 +37,10 @@ function queryExtractor(parameter: string) {
   const result: IQueryExtractor = {
     key: "",
     condition: "",
-    value: ""
-  }
+    value: "",
+  };
 
-  if (!parameter || typeof parameter !== 'string') {
+  if (!parameter || typeof parameter !== "string") {
     return result;
   }
 
@@ -57,9 +48,12 @@ function queryExtractor(parameter: string) {
     result.condition = getCondition(parameter);
     const virtualCondition = `%${result.condition}%`;
     const indexCondition = parameter.indexOf(virtualCondition);
-    
+
     result.key = parameter.substring(0, indexCondition);
-    result.value = parameter.substring(indexCondition + virtualCondition.length, parameter.length);
+    result.value = parameter.substring(
+      indexCondition + virtualCondition.length,
+      parameter.length
+    );
   }
 
   return result;
@@ -67,27 +61,31 @@ function queryExtractor(parameter: string) {
 
 export const parserQuery = (req: Request): FilterQuery<any> => {
   try {
-    const {
-      query
-    } = req.query;
+    const { query } = req.query;
 
-    if (query && typeof query === 'string') {
-      query.split(',').reduce((object: FilterQuery<any>, cur) => {
-        const {
-          key,
-          condition,
-          value
-        } = queryExtractor(cur);
+    let queries;
+    if (query && typeof query === "string") {
+      queries = query.split(",").reduce((object: FilterQuery<any>, cur) => {
+        const { key, condition, value } = queryExtractor(cur);
+
         /**
          * converting value from string to expected type
          * @param {String} inputValue Input value
          * @returns {String|Number|null} String | 10 | null
          */
         const convertValue = (inputValue: string | number | null) => {
-          if (inputValue && typeof inputValue == "string" && !inputValue.length) {
+          if (
+            inputValue &&
+            typeof inputValue == "string" &&
+            !inputValue.length
+          ) {
             // if value is ''
             return null;
-          } else if (inputValue && typeof inputValue == "string" && !isNaN(Number(inputValue))) {
+          } else if (
+            inputValue &&
+            typeof inputValue == "string" &&
+            !isNaN(Number(inputValue))
+          ) {
             // if value like '10'
             return Number(inputValue);
           } else {
@@ -96,20 +94,24 @@ export const parserQuery = (req: Request): FilterQuery<any> => {
           }
         };
 
-        switch(condition) {
+        if (!object[key]) {
+          object[key] = {};
+        }
+
+        switch (condition) {
           case "like":
-            object[key]["$regex"] = new RegExp(value, 'i');
+            object[key]["$regex"] = new RegExp(value, "i");
             break;
           case "nin":
           case "in":
-            object[key][condition] = value.split('|').map(convertValue);
+            object[key][condition] = value.split("|").map(convertValue);
           case "eq":
           case "ne":
           case "gt":
           case "gte":
           case "lt":
           case "lte":
-            object[key][condition] = convertValue(value);
+            object[key][`$${condition}`] = convertValue(value);
             break;
           default:
             break;
@@ -117,7 +119,9 @@ export const parserQuery = (req: Request): FilterQuery<any> => {
 
         return object;
       }, {});
+      
+      return queries;
     }
-  return
+
   } catch (error) {}
-}
+};

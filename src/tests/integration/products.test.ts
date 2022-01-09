@@ -9,14 +9,15 @@ const server = supertest(app);
 
 describe("MP01 GET /manage-product/v1/products?query,sort,limit,start", () => {
   test("should be return success", async() => {
+    await createProductService(mockData.createProductMock);
     const response = await server
-      .get("/manage-product/v1/products");
+      .get("/manage-product/v1/products?limit=10&start=0&sort=-createdAt");
     
       expect(response.status).toEqual(200);
   });
   test("query by field & limit & start should be return success", async() => {
     const response = await server
-    .get(`/manage-product/v1/products?limit=10&start=0&sort=-createdAt&query=name%like%`);
+    .get(`/manage-product/v1/products?query=name.vi%like%test`);
     
     expect(response.status).toEqual(200);
   });
@@ -41,9 +42,9 @@ describe("MP02 GET /manage-product/v1/private/products?query,sort,limit,start", 
 
   test("query by field & limit & start should be return success", async () => {
     const response = await server
-    .get(`/manage-product/v1/private/products?limit=10&start=0&sort=-createdAt&query=name%like%test`)
+    .get(`/manage-product/v1/private/products?limit=10&start=0&sort=-createdAt&query=price%eq%1000000`)
     .set('Authorization', `Bearer ${tokenMock}`);
-
+    
     expect(response.status).toEqual(200);
   });
 });
@@ -163,13 +164,12 @@ describe("MP07 DELETE /manage-product/v1/products/{id}", () => {
     expect(response.status).toEqual(204);
   });
 
-  test("missing id should return false", async() => {
+  test("missing header authorization should be return false", async() => {
     const response = await server
-      .delete(`/manage-product/v1/products/`)
-      .set('Authorization', `Bearer ${tokenMock}`)
+      .delete(`/manage-product/v1/products/${mockData.fakeId}`)
       .set("Accept", "application/json")
       .send({});
-    expect(response.status).toEqual(400);
+    expect(response.status).toEqual(401);
   });
 
   test("invalid id should return false", async() => {
