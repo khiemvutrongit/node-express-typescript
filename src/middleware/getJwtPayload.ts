@@ -43,7 +43,7 @@ export async function getJwtPayload(headers: Request["headers"], publicKey: stri
       };
       return jwt.verify(token, publicKey, verifyOptions) as Payload;
     } catch (error) {
-      error.status = 401;
+      error.status = UNAUTHORIZED;
       throw error;
     }
   } catch (error) {

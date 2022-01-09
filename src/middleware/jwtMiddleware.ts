@@ -26,7 +26,7 @@ export function JwtMiddleware(condition: ConditionHeader): RequestHandler {
       try {
         req.payload = await getJwtPayload(headers, publicKey);
       } catch (error) {
-        res.status(error.status).json(error);
+        return res.status(error.status).json(error);
       }
 
       if (permission) {

@@ -1,5 +1,8 @@
-import { Model, model, Schema, Date, Document, Types } from "mongoose";
+import { Request } from "express";
+import * as mongoose from 'mongoose';
+import { Model, model, Schema, Date, Document } from "mongoose";
 import { IName, NameSchema } from "./name.model";
+import { IPaginateOptions, paginate } from "./plugins/paginate.plugin";
 import subModel from "./submodel";
 
 export interface IProductFrom {
@@ -7,7 +10,7 @@ export interface IProductFrom {
   value: string;
 }
 
-export interface IProducts extends Document {
+export interface IProducts {
   accountId: string;
   name: Array<IName>;
   image: string;
@@ -103,8 +106,13 @@ const ProductSchema = new Schema<IProductDocument, IProductModel>(
   }
 );
 
-export interface IProductDocument extends IProducts {}
-export interface IProductModel extends Model<IProductDocument> {}
+// add plugin that paginate
+ProductSchema.plugin(paginate);
+
+export interface IProductDocument extends IProducts, Document {}
+export interface IProductModel extends Model<IProductDocument> {
+  paginate(req: Request, options: IPaginateOptions): void;
+}
 
 export const ProductModel = model<IProductDocument, IProductModel>(
   subModel.products,

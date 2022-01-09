@@ -19,14 +19,17 @@
     "brands": [],
     "categories": [],
     "technicalSpecifications": "Body Construction: Neck-Thru\nBody: Alder\nFinish: Nitro\nFinish Color: Pink\nNeck: Quartersawn Maple Neck\nFretboard: Ebony\nInlays: Sharkfin\nBinding: Ivoroid Fretboard and Headstock\nScale Length: 25.5\"\nTuning Keys: Gold Legacy Crown\nFrets: 24, Jumpo\nRadius: 12-16\" Compound Fretboard\n1st neck thickness: .780\"\n12st neck thickness: .850\"\nTremolo: Non-Recessed Floyd Rose\nPickup: Seymour Duncan JB Bridge & ‘59 Neck Humbuckers\nComes with Original Hardshell Case, COA & Tremolo Arm",
-    "productFrom": {
-      "key": "en",
-      "value": "United States"
-    },
-    "accountId": "fake-account",
-    "createdBy": "mock-created",
-    "modifiedBy": "mock-modified",
-    "active": true
+    "productFrom": "us",
+    "accountId": "615989459035e9a70614717b",
+    "createdBy": "615989459035e9a70614717b",
+    "modifiedBy": "615989459035e9a70614717b",
+    "public": true
+  },
+  "updateProductMock": {
+    "quantity": 10,
+    "publicQuantity": true,
+    "price": 1000000,
+    "publicPrice": false
   },
   "fakeId": "q9egvha9q923fh9s9chwhf"
 }
