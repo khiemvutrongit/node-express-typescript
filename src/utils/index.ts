@@ -1,1 +1,2 @@
-export * from "./remove-vietnamese-tone";
+export * from "./removeVietnameseTone";
+export * from "./queryParser";

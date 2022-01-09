@@ -1,94 +1,112 @@
-import { Model, model, Schema, Date } from "mongoose";
-import { Name, NameSchema } from "./name.model";
+import { Model, model, Schema, Date, Document, Types } from "mongoose";
+import { IName, NameSchema } from "./name.model";
+import subModel from "./submodel";
 
-export interface ProductFrom {
-	key: string;
-	value: string;
+export interface IProductFrom {
+  key: string;
+  value: string;
 }
 
-export interface Products {
-	id: string;
-	accountId: string;
-	name: Name[];
-	image: string;
-	publicQuantity: boolean;
-	quantity: number;
-	publicPrice: boolean;
-	price: number;
-	conditions: string[];
-	brands: string[];
-	categories: string[];
-	technicalSpecifications: string;
-	productFrom: ProductFrom[];
-	createdBy: string;
-	modifiedBy: string;
-	createdAt: Date;
-	modifiedAt: Date;
-	active: boolean;
+export interface IProducts extends Document {
+  accountId: string;
+  name: Array<IName>;
+  image: string;
+  publicQuantity: boolean;
+  quantity: number;
+  publicPrice: boolean;
+  price: number;
+  conditions: Array<string>;
+  brands: Array<string>;
+  categories: Array<string>;
+  technicalSpecifications: string;
+  productFrom: string;
+  createdBy: string;
+  modifiedBy: string;
+  createdAt?: Date;
+  modifiedAt?: Date;
+  active?: boolean;
+  public?: boolean;
 }
 
-// Start Product Schema
-const ProductSchema = new Schema <Products, Model<Products>>({
-	accountId: {
-		type: String,
-		required: true,
-	},
-	name: [NameSchema],
-	image: {
-		type: String,
-		required: true,
-	},
-	publicQuantity: {
-		type: Boolean,
-		default: false,
-	},
-	quantity: {
-		type: Number,
-		min: 0,
-		default: 0
-	},
-	publicPrice: {
-		type: Boolean,
-		default: false,
-	},
-	price: {
-		type: Number,
-		min: 0
-	},
-	conditions: [String],
-	brands: [String],
-	categories: [String],
-	technicalSpecifications: {
-		type: String,
-		maxlength: 1000,
-	},
-	productFrom: [
-		{
-			key: {
-				type: String,
-				maxlength: 1000
-			},
-			value: {
-				type: String,
-				maxlength: 1000
-			},
-		},
-	],
-	createdBy: String,
-	modifiedBy: String,
-	createdAt: { 
-		type: Date, 
-		default: Date.now 
-	},
-	modifiedAt: { 
-		type: Date, 
-		default: Date.now 
-	},
-	active: {
-		type: Boolean,
-		default: true,
-	},
-});
-// End Product Schema
+const ProductSchema = new Schema<IProductDocument, IProductModel>(
+  {
+    accountId: {
+      type: String,
+      required: true,
+      select: false,
+    },
+    name: [NameSchema],
+    image: {
+      type: String,
+      required: true,
+    },
+    publicQuantity: {
+      type: Boolean,
+      default: false,
+    },
+    quantity: {
+      type: Number,
+      min: 0,
+      default: 0,
+    },
+    publicPrice: {
+      type: Boolean,
+      default: false,
+    },
+    price: {
+      type: Number,
+      min: 0,
+    },
+    conditions: [
+      {
+        type: String,
+      },
+    ],
+    brands: [
+      {
+        type: String,
+      },
+    ],
+    categories: [
+      {
+        type: String,
+      },
+    ],
+    technicalSpecifications: {
+      type: String,
+      maxlength: 1000,
+    },
+    productFrom: {
+      type: String,
+    },
+    createdBy: String,
+    modifiedBy: String,
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
+    modifiedAt: {
+      type: Date,
+      default: Date.now,
+    },
+    active: {
+      type: Boolean,
+      default: false,
+    },
+    public: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  {
+    versionKey: false,
+  }
+);
 
-export const ProductModel: Model<Products> = model("products", ProductSchema);
+export interface IProductDocument extends IProducts {}
+export interface IProductModel extends Model<IProductDocument> {}
+
+export const ProductModel = model<IProductDocument, IProductModel>(
+  subModel.products,
+  ProductSchema
+);

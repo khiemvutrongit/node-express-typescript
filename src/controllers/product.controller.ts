@@ -1,21 +1,30 @@
 import { Request, Response } from "express";
-import httpStatus from "http-status";
-import { ProductModel, Products } from "../models";
+import { BAD_REQUEST, CREATED, INTERNAL_SERVER_ERROR } from "http-status";
+import { createProductService } from "../services/product.service";
+import { IProductDocument } from "../models";
 
-export const CreateProductController = async (req: Request, res: Response) => {
+/**
+ * Create a new product
+ * @param req - Request parameter
+ * @param res - Send JSON response.
+ * @returns {Promise<Response>}
+ */
+export const CreateProductController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
   try {
-    const body: any = req.body;
-    const objCreate: Products = body;
+    const objCreateDocument: IProductDocument = req.body;
 
-    let result;
+    let result: IProductDocument;
     try {
-      result = await ProductModel.create(objCreate);
+      result = await createProductService(objCreateDocument);
     } catch (error) {
-      return res.status(httpStatus.BAD_REQUEST).json(error)
+      return res.status(BAD_REQUEST).json(error);
     }
 
-    return res.status(httpStatus.CREATED).json(result);
+    return res.status(CREATED).json(result);
   } catch (error) {
-    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json(error);
+    return res.status(INTERNAL_SERVER_ERROR).json(error);
   }
-}
+};

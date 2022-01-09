@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
 
-export interface Name {
+export interface IName {
   key: string;
   value: string;
 }

@@ -6,6 +6,7 @@ import jwt from "jsonwebtoken";
 export interface Payload {
   acc: string;
   permissions: string | string[];
+  property?: Array<string>
   email: string;
   iat?: number;
   exp?: number;
