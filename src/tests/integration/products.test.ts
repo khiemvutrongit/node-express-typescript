@@ -51,7 +51,7 @@ describe("MP02 GET /manage-product/v1/private/products?query,sort,limit,start", 
 
 describe("MP03 GET /manage-product/v1/products/{id}", () => {
 
-  test("get one product public should return success", async () => {
+  test("get product public should return success", async () => {
     const productMock = await createProductService(mockData.createProductMock);
     const response = await server
     .get(`/manage-product/v1/products/${productMock.id}`);

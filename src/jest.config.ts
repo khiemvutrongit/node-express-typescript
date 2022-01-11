@@ -5,7 +5,7 @@ const config: Config.InitialOptions = {
   preset: 'ts-jest',
   verbose: true,
   maxWorkers: '',
-  rootDir: '',
+  rootDir: './tests/integration',
   watchAll: false
 };
 export default config;

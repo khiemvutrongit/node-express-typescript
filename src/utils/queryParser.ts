@@ -119,9 +119,8 @@ export const parserQuery = (req: Request): FilterQuery<any> => {
 
         return object;
       }, {});
-      
+
       return queries;
     }
-
   } catch (error) {}
 };
