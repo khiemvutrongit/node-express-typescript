@@ -17,7 +17,7 @@ app.use(
 	})
 );
 
-app.use(process.env['ROOT_PATH'], routes);
+app.use(`${process.env['ROOT_PATH']}/v1`, routes);
 
 app.use("*", (req, res) => {
 	return res.status(status.NOT_FOUND).json({

@@ -1,6 +1,5 @@
 import { Request } from "express";
 import { Model, model, Schema, Date, Document } from "mongoose";
-import { IName, NameSchema } from "./name.model";
 import { IPaginateOptions, paginate } from "./plugins/paginate.plugin";
 import subModel from "./submodel";
 
@@ -11,7 +10,7 @@ export interface IProductFrom {
 
 export interface IProducts {
   accountId: string;
-  name: Array<IName>;
+  name: string;
   image: string;
   publicQuantity: boolean;
   quantity: number;
@@ -38,7 +37,10 @@ const ProductSchema = new Schema<IProductDocument, IProductModel>(
       required: true,
       select: false,
     },
-    name: [NameSchema],
+    name: {
+      type: String,
+      required: true,
+    },
     image: {
       type: String,
       required: true,

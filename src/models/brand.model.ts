@@ -1,11 +1,11 @@
+import { Request } from "express";
 import { model, Model, Schema } from "mongoose";
-import { IName, NameSchema } from "./name.model";
 import { IPaginateOptions, paginate } from "./plugins/paginate.plugin";
 import subModel from "./submodel";
 
 export interface IBrand {
   accountId: string;
-  name: Array<IName>;
+  name: string;
   image: string;
   path: string;
   createdBy: string;
@@ -22,7 +22,10 @@ const BrandSchema = new Schema<IBrandDocument, IBrandModel>({
     required: true,
     select: false
   },
-  name: [NameSchema],
+  name: {
+    type: String,
+    required: true
+  },
   image: {
     type: String,
     required: true
