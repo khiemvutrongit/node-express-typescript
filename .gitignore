@@ -4,4 +4,3 @@ dist
 .env
 .env.dev
 .env.prod
-README.md
