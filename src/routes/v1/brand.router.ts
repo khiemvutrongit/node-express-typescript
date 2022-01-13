@@ -4,11 +4,11 @@ import {
   Response 
 } from "express";
 import {
-  CreateProductController,
-  DeleteProductController,
-  GetProductController,
-  GetProductsController,
-  UpdateProductController,
+  CreateBrandController,
+  GetBrandController,
+  GetBrandsController,
+  UpdateBrandController,
+  DeleteBrandController
 } from "../../controllers";
 import { JwtMiddleware } from "../../middleware";
 import { Base64 } from "js-base64";
@@ -22,10 +22,10 @@ router.post(
     publicKey: publicKey,
     permission: "mp:c",
   }),
-  CreateProductController
+  CreateBrandController
 );
 
-router.get("/", GetProductsController);
+router.get("/", GetBrandsController);
 
 router.get(
   "/private",
@@ -33,10 +33,10 @@ router.get(
     publicKey: publicKey,
     permission: "mp:r",
   }),
-  GetProductsController
+  GetBrandsController
 );
 
-router.get("/:id", GetProductController);
+router.get("/:id", GetBrandController);
 
 router.get(
   "/private/:id",
@@ -44,7 +44,7 @@ router.get(
     publicKey: publicKey,
     permission: "mp:r",
   }),
-  GetProductController
+  GetBrandController
 );
 
 router.put(
@@ -53,7 +53,7 @@ router.put(
     publicKey: publicKey,
     permission: "mp:c",
   }),
-  UpdateProductController
+  UpdateBrandController
 );
 
 router.delete(
@@ -62,7 +62,7 @@ router.delete(
     publicKey: publicKey,
     permission: "mp:c",
   }),
-  DeleteProductController
+  DeleteBrandController
 );
 
 router.get("/check", (req: Request, res: Response) => {

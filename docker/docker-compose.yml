@@ -1,13 +1,16 @@
 version: "3"
 services:
   app:
-    build: .
     image: product
     container_name: product 
     ports:
       - 3000:3000
     env_file:
+<<<<<<< HEAD
       - .env
+=======
+      - develop.env
+>>>>>>> develop
     stdin_open: true
     tty: true
     restart: always

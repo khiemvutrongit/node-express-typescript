@@ -17,32 +17,32 @@ describe("MP01 GET /manage-product/v1/products?query,sort,limit,start", () => {
   });
   test("query by field & limit & start should be return success", async() => {
     const response = await server
-    .get(`/manage-product/v1/products?query=name.vi%like%test`);
+      .get(`/manage-product/v1/products?query=name%like%test`);
     
     expect(response.status).toEqual(200);
   });
 });
 
-describe("MP02 GET /manage-product/v1/private/products?query,sort,limit,start", () => {
+describe("MP02 GET /manage-product/v1/products/private?query,sort,limit,start", () => {
   const tokenMock = generateToken(payload, privateKey);
   test("should be return success", async () => {
     const response = await server
-    .get("/manage-product/v1/private/products")
-    .set('Authorization', `Bearer ${tokenMock}`);
+      .get("/manage-product/v1/products/private")
+      .set('Authorization', `Bearer ${tokenMock}`);
 
     expect(response.status).toEqual(200);
   });
 
   test("missing header authorization should be return false", async() => {
     const response = await server
-    .get(`/manage-product/v1/private/products?limit=10&start=0&sort=-createdAt&query=name%like%test`);
+      .get(`/manage-product/v1/products/private?limit=10&start=0&sort=-createdAt&query=name%like%test`);
 
     expect(response.status).toEqual(401);
   });
 
   test("query by field & limit & start should be return success", async () => {
     const response = await server
-    .get(`/manage-product/v1/private/products?limit=10&start=0&sort=-createdAt&query=price%eq%1000000`)
+    .get(`/manage-product/v1/products/private?limit=10&start=0&sort=-createdAt&query=price%eq%1000000`)
     .set('Authorization', `Bearer ${tokenMock}`);
     
     expect(response.status).toEqual(200);
@@ -68,13 +68,13 @@ describe("MP03 GET /manage-product/v1/products/{id}", () => {
 
 });
 
-describe("MP04 GET /manage-product/v1/private/products/{id}", () => {
+describe("MP04 GET /manage-product/v1/products/private/{id}", () => {
   const tokenMock = generateToken(payload, privateKey);
 
   test("get one product private should return success", async () => {
     const productMock = await createProductService(mockData.createProductMock);
     const response = await server
-    .get(`/manage-product/v1/private/products/${productMock.id}`)
+    .get(`/manage-product/v1/products/private/${productMock.id}`)
     .set('Authorization', `Bearer ${tokenMock}`);
 
     expect(response.status).toEqual(200);
@@ -82,7 +82,7 @@ describe("MP04 GET /manage-product/v1/private/products/{id}", () => {
 
   test("invalid id private should be return false", async () => {
     const response = await server
-    .get(`/manage-product/v1/private/products/${mockData.fakeId}`)
+    .get(`/manage-product/v1/products/private/${mockData.fakeId}`)
     .set('Authorization', `Bearer ${tokenMock}`);
 
     expect(response.status).toEqual(400);

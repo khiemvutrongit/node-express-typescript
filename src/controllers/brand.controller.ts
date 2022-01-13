@@ -6,32 +6,32 @@ import {
   NOT_FOUND,
   OK,
 } from "http-status";
-import {
-  createProductService,
-  deleteProductService,
-  getProductService,
-  getProductsService,
-  updateProductService,
-} from "../services";
-import { IProductDocument } from "../models";
 import { IPaginateOptions } from "../models/plugins/paginate.plugin";
+import { IBrandDocument } from "../models";
+import {
+  createBrandService,
+  updateBrandService,
+  getBrandService,
+  getBrandsService,
+  deleteBrandService,
+} from "../services";
 
 /**
- * Create a new product
+ * Create a Brand
  * @param req - Request parameter
  * @param res - Send JSON response.
  * @returns {Promise<Response>}
  */
-export const CreateProductController = async (
-  req: Request,
+export const CreateBrandController = async (
+  req: Request, 
   res: Response
 ): Promise<Response> => {
   try {
-    const objCreateDocument: IProductDocument = req.body;
+    const objectCreateDocument: IBrandDocument = req.body;
 
-    let result: IProductDocument;
+    let result: IBrandDocument;
     try {
-      result = await createProductService(objCreateDocument);
+      result = await createBrandService(objectCreateDocument);
     } catch (error) {
       return res.status(BAD_REQUEST).json(error);
     }
@@ -48,8 +48,8 @@ export const CreateProductController = async (
  * @param res - Send JSON response.
  * @returns {Promise<Response>}
  */
-export const GetProductsController = async (
-  req: Request, 
+export const GetBrandsController = async (
+  req: Request,
   res: Response
 ): Promise<Response> => {
   try {
@@ -57,7 +57,7 @@ export const GetProductsController = async (
 
     let result;
     try {
-      result = await getProductsService(req, options);
+      result = await getBrandsService(req, options);
     } catch (error) {
       return res.status(error.status || 400).json(error);
     }
@@ -66,15 +66,15 @@ export const GetProductsController = async (
   } catch (error) {
     return res.status(INTERNAL_SERVER_ERROR).json("Unexpected Error");
   }
-};
+}
 
 /**
- * Get a product
+ * Get a Brand
  * @param req - Request parameter
  * @param res - Send JSON response.
  * @returns {Promise<Response>}
  */
-export const GetProductController = async (
+export const GetBrandController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
@@ -83,7 +83,7 @@ export const GetProductController = async (
 
     let result;
     try {
-      result = await getProductService(id);
+      result = await getBrandService(id);
     } catch (error) {
       return res.status(error.status).json(error);
     }
@@ -100,15 +100,15 @@ export const GetProductController = async (
   } catch (error) {
     return res.status(INTERNAL_SERVER_ERROR).json("Unexpected Error");
   }
-};
+}
 
 /**
- * Update a product
+ * Update a Brand
  * @param req - Request parameter
  * @param res - Send JSON response.
  * @returns {Promise<Response>}
  */
-export const UpdateProductController = async (
+export const UpdateBrandController = async (
   req: Request, 
   res: Response
 ): Promise<Response> => {
@@ -118,7 +118,7 @@ export const UpdateProductController = async (
 
     let result;
     try {
-      result = await updateProductService(id, payload, body);
+      result = await updateBrandService(id, payload, body);
     } catch (error) {
       return res.status(error.status).json(error);
     }
@@ -127,15 +127,9 @@ export const UpdateProductController = async (
   } catch (error) {
     return res.status(INTERNAL_SERVER_ERROR).json("Unexpected Error");
   }
-};
+}
 
-/**
- * Get a product
- * @param req - Request parameter
- * @param res - Send JSON response.
- * @returns {Promise<Response>}
- */
-export const DeleteProductController = async (
+export const DeleteBrandController = async (
   req: Request, 
   res: Response
 ): Promise<Response> => {
@@ -144,7 +138,7 @@ export const DeleteProductController = async (
     const payload = req.payload;
 
     try {
-      await deleteProductService(id, payload);
+      await deleteBrandService(id, payload);
     } catch (error) {
       return res.status(error.status || BAD_REQUEST).json(error);
     }
@@ -153,4 +147,4 @@ export const DeleteProductController = async (
   } catch (error) {
     return res.status(INTERNAL_SERVER_ERROR).json("Unexpected Error");
   }
-};
+}
