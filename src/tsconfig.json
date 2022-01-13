@@ -8,7 +8,8 @@
     ],
     "exclude": [
         "jest.config.ts",
-        "node_modules"
+        "node_modules",
+        "banner"
     ],
     "compilerOptions": {
         "module": "commonjs",
@@ -18,7 +19,7 @@
         "types": ["node", "jest"],
         "noImplicitAny": true,
         "moduleResolution": "node",
-        "sourceMap": true,
+        "sourceMap": false,
         "skipLibCheck": true,
         "resolveJsonModule": true,
         "outDir": "../dist",

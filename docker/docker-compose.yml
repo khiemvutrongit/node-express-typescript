@@ -2,8 +2,8 @@ version: "3"
 services:
   app:
     build: .
-    image: manage-product
-    container_name: manage-product
+    image: product
+    container_name: product 
     ports:
       - 3000:3000
     environment:

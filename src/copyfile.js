@@ -3,6 +3,7 @@ const packageFile = require('./package.json');
 
 delete packageFile.devDependencies;
 delete packageFile.nodemonConfig;
+delete packageFile.dependencies.figlet;
 
 const packageObj = {
   ...packageFile,

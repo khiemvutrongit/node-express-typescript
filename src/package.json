@@ -6,10 +6,10 @@
   "license": "ISC",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node banner/figlet.config.ts start && DEVELOP_ENV=dev node -r ts-node/register --inspect server.ts",
+    "start": "ts-node banner/figlet.config.ts start-server && DEVELOP_ENV=dev node -r ts-node/register --inspect server.ts",
     "start:nodemon": "nodemon",
     "start:dist": "cd ../dist && npm run start && cd ../src",
-    "test": "ts-node banner/figlet.config.ts test && DEVELOP_ENV=dev jest",
+    "test": "ts-node banner/figlet.config.ts tests && DEVELOP_ENV=dev jest",
     "test:integration": "ts-node banner/figlet.config.ts integration-test && DEVELOP_ENV=dev jest --watchAll --testPathPattern=src/tests/integration",
     "test:unit": "ts-node banner/figlet.config.ts unit-test && DEVELOP_ENV=dev jest --watchAll --testPathPattern=src/tests/unit",
     "test:dist": "cd ../dist && npm run test && cd ../src",
@@ -17,7 +17,6 @@
     "clean": "cd .. && rm -rf dist && mkdir dist",
     "build": "ts-node banner/figlet.config.ts build && npm run clean && npm run copyfile && tsc && cd ../dist && npm i --no-fund && cd ../src"
   },
-  "keywords": [],
   "nodemonConfig": {
     "ignore": [
       "**/*.test.ts",
@@ -31,13 +30,11 @@
     "ext": "ts"
   },
   "dependencies": {
-    "async": "^3.2.2",
     "axios": "^0.24.0",
     "base-64": "^1.0.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
     "figlet": "^1.5.2",
-    "formidable": "^3.2.1",
     "http-status": "^1.5.0",
     "jest": "^27.4.5",
     "js-base64": "^3.7.2",
@@ -46,7 +43,6 @@
     "supertest": "^6.1.6"
   },
   "devDependencies": {
-    "@types/async": "^3.2.12",
     "@types/base-64": "^1.0.0",
     "@types/eslint": "^6.8.1",
     "@types/express": "^4.17.11",
