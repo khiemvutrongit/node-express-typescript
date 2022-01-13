@@ -2,7 +2,7 @@
   "name": "product-manage",
   "version": "1.0.0",
   "description": "",
-  "author": "KV",
+  "author": "Khiem Vu",
   "license": "ISC",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,9 @@
     "test:dist": "cd ../dist && npm run test && cd ../src",
     "copyfile": "node copyfile",
     "clean": "cd .. && rm -rf dist && mkdir dist",
-    "build": "ts-node banner/figlet.config.ts build && npm run clean && npm run copyfile && tsc && cd ../dist && npm i --no-fund && cd ../src"
+    "build": "ts-node banner/figlet.config.ts build && npm run clean && npm run copyfile && tsc && cd ../dist && npm i --no-fund && cd ../src",
+    "docker:build": "cd .. && docker build -f docker/Dockerfile -t product . && cd src",
+    "docker:start": "npm run docker:build && cd .. && docker-compose -f docker/docker-compose.yml up -d && cd src"
   },
   "nodemonConfig": {
     "ignore": [

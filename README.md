@@ -27,5 +27,6 @@
     + Run `npm run test:dist` to run test in folder dist.
 
 ## Docker
-  + Run `docker build -f docker/Dockerfile -t product .` for build image.
-  + Run `docker-compose -f docker/docker-compose.yml up -d` for run image.
+  + Run `cd src` go into folder src.
+    + Run `npm run docker:build` for build image.
+    + Run `npm run docker:start` for run image.
