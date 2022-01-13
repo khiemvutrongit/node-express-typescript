@@ -29,7 +29,3 @@
 ## Docker
   + Run `docker build -f docker/Dockerfile -t product .` for build image.
   + Run `docker-compose -f docker/docker-compose.yml up -d` for run image.
-
-
-## Token
-`eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2MiOiI2MTU5ODk0NTkwMzVlOWE3MDYxNDcxN2IiLCJwZXJtaXNzaW9ucyI6Im1wOnIgbXA6YyIsImVtYWlsIjoidGVzdEBnbWFpbC5jb20iLCJpYXQiOjE2NDE4ODQxMjYsImV4cCI6MzY0MTg4NTAyNn0.Mql9vA8dLCw4PazNW-F_AnJR1pvayf4O8LxemcGkPryWaoKw25CbdoRE7JZmJdPkt7Eoh70k3rHm9QLSc7MbB1Ob7mKwWqR0tGluC2AyBMtO-sKS9WMtWUZ8evVq4H8ItRJw-Puxgi_eBLzdVitkm1p7MFYhxFzD-SHw_msxmMVFI4FHOQIt2cZ98aFAcq-AvPPDP5rQ-n4F2L4g_h_5lRymJwDKAPw-OYIPsUOlVn_YUwdmFEQBsAIhRAh4usEYHcnvA8CdfsdBzmv0h_5Q_SXD1ByU0dI2MAfec2kLJD3DcNJ7ubWmxeQ83mh2-yL3KLz4KmE4dFeABlZFganxzw`
