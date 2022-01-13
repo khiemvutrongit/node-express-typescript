@@ -1,5 +1,4 @@
 import { Request } from "express";
-import * as mongoose from 'mongoose';
 import { Model, model, Schema, Date, Document } from "mongoose";
 import { IName, NameSchema } from "./name.model";
 import { IPaginateOptions, paginate } from "./plugins/paginate.plugin";
@@ -18,6 +17,7 @@ export interface IProducts {
   quantity: number;
   publicPrice: boolean;
   price: number;
+  path: string;
   conditions: Array<string>;
   brands: Array<string>;
   categories: Array<string>;
@@ -40,6 +40,10 @@ const ProductSchema = new Schema<IProductDocument, IProductModel>(
     },
     name: [NameSchema],
     image: {
+      type: String,
+      required: true,
+    },
+    path: {
       type: String,
       required: true,
     },
@@ -95,10 +99,12 @@ const ProductSchema = new Schema<IProductDocument, IProductModel>(
     active: {
       type: Boolean,
       default: false,
+      select: false
     },
     public: {
       type: Boolean,
       default: false,
+      select: false
     },
   },
   {

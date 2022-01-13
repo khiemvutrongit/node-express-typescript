@@ -1,18 +1,17 @@
-import { Request } from "express";
+import { BrandModel, IBrand, IBrandDocument } from "../models";
 import { BAD_REQUEST, NOT_FOUND } from "http-status";
 import { isValidObjectId, Types } from "mongoose";
 import { Payload } from "../middleware";
-import { IProductDocument, IProducts, ProductModel } from "../models";
 import { IPaginateOptions } from "../models/plugins/paginate.plugin";
 
-export const createProductService = (product: IProducts) => {
-  return ProductModel.create(product);
-};
+export const createBrandService = (brand: IBrand) => {
+  return BrandModel.create(brand);
+}
 
-export const updateProductService = async (
+export const updateBrandService = async (
   id: string,
   payload: Payload,
-  product: IProductDocument
+  product: IBrandDocument
 ) => {
   if (!isValidObjectId(id)) {
     const error = new Error("Invalid Id");
@@ -38,10 +37,10 @@ export const updateProductService = async (
     };
   }
 
-  const document = await ProductModel.findOne({
+  const document = await BrandModel.findOne({
     _id: id,
     accountId: payload.acc,
-    active: false,
+    active: false
   });
 
   if (!document) {
@@ -57,9 +56,9 @@ export const updateProductService = async (
   await document.save();
 
   return document;
-};
+}
 
-export const deleteProductService = async (id: string, payload: Payload) => {
+export const deleteBrandService = async (id: string, payload: Payload) => {
   if (!isValidObjectId(id)) {
     const error = new Error("Invalid Id");
     throw {
@@ -76,7 +75,7 @@ export const deleteProductService = async (id: string, payload: Payload) => {
     };
   }
 
-  const document = await ProductModel.findOne({
+  const document = await BrandModel.findOne({
     _id: new Types.ObjectId(id),
     accountId: payload.acc,
     active: false,
@@ -91,18 +90,11 @@ export const deleteProductService = async (id: string, payload: Payload) => {
   }
 
   document.active = true;
-  
+
   return document.save();
-};
+}
 
-export const getProductsService = async (
-  req: Request,
-  options: IPaginateOptions
-) => {
-  return ProductModel.paginate(req, options);
-};
-
-export const getProductService = async (id: string) => {
+export const getBrandService = async (id: string ) => {
   if (!isValidObjectId(id)) {
     const error = new Error("Invalid Id");
     throw {
@@ -111,8 +103,15 @@ export const getProductService = async (id: string) => {
     };
   }
 
-  return ProductModel.findOne({
+  return BrandModel.findOne({
     _id: new Types.ObjectId(id),
     active: false,
   });
-};
+}
+
+export const getBrandsService = async (  
+  req: Request,
+  options: IPaginateOptions
+) => {
+  return BrandModel.paginate(req, options);
+}
