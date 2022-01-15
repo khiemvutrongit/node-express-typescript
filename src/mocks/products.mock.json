@@ -32,5 +32,11 @@
     "createdBy": "615989459035e9a70614717b",
     "modifiedBy": "615989459035e9a70614717b",
     "public": true
+  },
+  "updateBrandMock": {
+    "name": "mock data integration test update",
+    "image": "https://whammybar.com/assets/app/uploads/mediaFiles/A9LKngHF5martatTn.jpg",
+    "path": "mock-data-integration-test-update",
+    "public": true
   }
 }

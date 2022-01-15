@@ -98,7 +98,7 @@ describe("MP05 POST /manage-product/v1/products", () => {
       .set('Authorization', `Bearer ${tokenMock}`)
       .set("Accept", "application/json")
       .send({})
-      .expect(400);
+
     expect(response.status).toEqual(400);
   });
 
