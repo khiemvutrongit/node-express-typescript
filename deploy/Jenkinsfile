@@ -19,7 +19,7 @@ pipeline {
     stages {
         stage('SCM') {
             steps {
-                git branch: 'develop', credentialsId: 'github', url: 
+                git branch: 'develop', credentialsId: 'github', url: gitRrl
                 script {
                     GIT_COMMIT_ID = sh (
                         returnStdout: true, script: "git log -n 1 --pretty=format:'%H'"
@@ -54,6 +54,10 @@ pipeline {
                 echo 'Testing ...'
             }
         }
-    
+        stage('Deploy') {
+            steps {
+                echo 'Deploying ...'
+            }
+        }
     }
 }
