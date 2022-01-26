@@ -1,8 +1,6 @@
 - hosts: dev
   become: yes
   become_method: sudo
-  vars:
-    project_name: product
   tasks:
     - name: Print the actual user
       command: whoami

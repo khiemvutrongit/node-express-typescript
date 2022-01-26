@@ -64,7 +64,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                ansiblePlaybook credentialsId: 'dev-server', disableHostKeyChecking: true, extras: '-e defaultTag="${GIT_TAG}"', installation: 'ansible', inventory: 'dev.inv', playbook: 'ansible.yml'
+                ansiblePlaybook credentialsId: 'dev-server', disableHostKeyChecking: true, installation: 'ansible', inventory: 'dev.inv', playbook: 'ansible.yml'
             }
         }
     }
