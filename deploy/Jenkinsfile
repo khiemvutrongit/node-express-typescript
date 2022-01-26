@@ -1,10 +1,52 @@
+def gitRrl = 'https://github.com/khiemvutrongit/node-express-typescript.git'
+def branch  = 'main'
+def defaultTag = 'latest'
+def dockerUrl = 'https://hub.docker.com'
+def imageName = 'dannykvrepo/node-ci-cd'
+def tokenAccess = '6f6d1c16-5886-4f58-b19c-941f6da40fb6'
+
 pipeline {
     agent any
+    
+    environment {
+        GIT_COMMIT_ID = ""
+        GIT_MESSAGE = ""
+        GIT_USER = ""
+        GIT_DATE = ""
+        GIT_TAG = ""
+    }
 
     stages {
-        stage('Build') {
+        stage('SCM') {
             steps {
-                echo 'Building..'
+                git branch: 'develop', credentialsId: 'github', url: 
+                script {
+                    GIT_COMMIT_ID = sh (
+                        returnStdout: true, script: "git log -n 1 --pretty=format:'%H'"
+                    ).trim()
+                    
+                    GIT_MESSAGE = sh (
+                        returnStdout: true, script: "git log -n 1 --pretty=format:'%s'"
+                    ).trim()
+                    
+                    GIT_USER = sh (
+                        returnStdout: true, script: "git log -n 1 --pretty=format:'%an'"
+                    ).trim()
+                    
+                    GIT_DATE = sh (
+                        returnStdout: true, script: "git log -n 1 --pretty=format:'%ad'"
+                    ).trim()
+
+                    def gitTag = sh (
+                        returnStdout: true, script: "git tag -l --points-at HEAD"
+                    ).trim()
+
+                    if (gitTag?.trim()) {
+                        GIT_TAG = gitTag
+                    } else {
+                        GIT_TAG = defaultTag
+                    }
+                }
             }
         }
         stage('Test') {
@@ -12,10 +54,6 @@ pipeline {
                 echo 'Testing ...'
             }
         }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying ...'
-            }
-        }
+    
     }
 }
