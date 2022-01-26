@@ -1,0 +1,26 @@
+- hosts: dev
+  become: yes
+  become_method: sudo
+  vars:
+    project_name: product
+  tasks:
+    - name: Creates directory to store project
+      file:
+        path: /var/docker/www/{{ project_name }}
+        state: directory
+
+    - name: Set project folder owner
+      file: 
+        dest: /var/docker/www/{{ project_name }}
+        owner: jenkin_ssh_user 
+        recurse: yes
+
+    - name: Copy Docker-composer to remote server
+      copy:
+        src: ./docker-compose.yml
+        dest: /var/docker/www/{{ project_name }}
+
+    - name: Start docker-compose
+      shell: docker-compose -f docker-compose.yml up -d
+      args:
+        chdir: /var/docker/www/{{ project_name }}
