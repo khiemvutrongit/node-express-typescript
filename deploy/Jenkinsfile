@@ -49,11 +49,19 @@ pipeline {
                 }
             }
         }
-        stage('Test') {
+
+        stage('Docker Build, Push'){
             steps {
-                echo 'Testing ...'
+                dir('./') {
+                    withDockerRegistry(credentialsId: 'dockerhub', url: "") {
+                        sh "docker build -t ${imageName} ."
+                        sh "docker tag ${imageName}:latest ${imageName}:${GIT_TAG}"
+                        sh "docker push ${imageName}:${defaultTag}"
+                    }
+                }
             }
         }
+        
         stage('Deploy') {
             steps {
                 echo 'Deploying ...'
