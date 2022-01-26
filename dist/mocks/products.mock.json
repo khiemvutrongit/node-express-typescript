@@ -1,0 +1,42 @@
+{
+    "createProductMock": {
+        "name": "mock data integration test vietnamese",
+        "image": "https://whammybar.com/assets/app/uploads/mediaFiles/A9LKngHF5martatTn.jpg",
+        "quantity": 10,
+        "publicQuantity": true,
+        "price": 1000000,
+        "publicPrice": true,
+        "path": "mock-data-integration-test-vietnamese",
+        "conditions": [],
+        "brands": [],
+        "categories": [],
+        "technicalSpecifications": "Body Construction: Neck-Thru\nBody: Alder\nFinish: Nitro\nFinish Color: Pink\nNeck",
+        "productFrom": "us",
+        "accountId": "615989459035e9a70614717b",
+        "createdBy": "615989459035e9a70614717b",
+        "modifiedBy": "615989459035e9a70614717b",
+        "public": true
+    },
+    "updateProductMock": {
+        "quantity": 10,
+        "publicQuantity": true,
+        "price": 1000000,
+        "publicPrice": false
+    },
+    "fakeId": "q9egvha9q923fh9s9chwhf",
+    "createBrandMock": {
+        "name": "mock data integration test vietnamese",
+        "image": "https://whammybar.com/assets/app/uploads/mediaFiles/A9LKngHF5martatTn.jpg",
+        "path": "mock-data-integration-test-vietnamese",
+        "accountId": "615989459035e9a70614717b",
+        "createdBy": "615989459035e9a70614717b",
+        "modifiedBy": "615989459035e9a70614717b",
+        "public": true
+    },
+    "updateBrandMock": {
+        "name": "mock data integration test update",
+        "image": "https://whammybar.com/assets/app/uploads/mediaFiles/A9LKngHF5martatTn.jpg",
+        "path": "mock-data-integration-test-update",
+        "public": true
+    }
+}
